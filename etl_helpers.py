@@ -3,6 +3,7 @@ from zipfile import ZipFile
 import sqlite3
 import os
 import pandas as pd
+from analysis import *
 
 cur_dir = os.getcwd()
 csv_path = "lnd/202504-bluebikes-tripdata.csv"
@@ -37,3 +38,9 @@ def lnd(src_url):
     conn = sqlite3.connect("bluebikes.db")
 
     df.to_sql('LND',conn,if_exists="replace")
+
+def run_analysis():
+    metric_a()
+    metric_b()
+    metric_c()
+    metric_d()
