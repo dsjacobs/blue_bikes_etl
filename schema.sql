@@ -1,13 +1,13 @@
-CREATE TABLE stations AS (
+CREATE TABLE stations AS 
     SELECT DISTINCT start_station_id AS id,
         start_station_name AS station_name 
     FROM lnd
     UNION SELECT end_station_id,
         end_station_name
     FROM lnd
-);
+;
 
-CREATE TABLE rides AS (
+CREATE TABLE rides AS 
 SELECT 
     ride_id,
     rideable_type,
@@ -17,4 +17,4 @@ SELECT
     end_station_id,
     member_casual
 FROM lnd
-);
+;
