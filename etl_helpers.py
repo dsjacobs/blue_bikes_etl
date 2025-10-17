@@ -18,7 +18,7 @@ def run_sql_folder(conn, folder, file_list):
 
 def run_sql(path):
     with open(path, "r") as f:
-            sql = f.read()
+        sql = f.read()
     conn.executescript(sql)  
 
 def lnd(src_url):
