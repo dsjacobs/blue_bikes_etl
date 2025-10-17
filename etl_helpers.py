@@ -10,7 +10,7 @@ db_pth = "sqlite/bluebikes.db"
 conn = sqlite3.connect("bluebikes.db")
 
 def find_csv(CSV_DIR):
-     for root, dirs, files in os.walk(CSV_DIR):
+     for root, files in os.walk(CSV_DIR):
         for file in files:
             if file.endswith(".csv"):
                 return os.path.join(root, file)
@@ -34,6 +34,7 @@ def lnd(src_url):
     with ZipFile(zip_download_path) as zipObject:
         zipObject.extractall(os.path.join(cur_dir,"lnd"))
 
+    csv_path = find_csv("lnd")
     df = pd.read_csv(csv_path)
     conn = sqlite3.connect("bluebikes.db")
 
