@@ -8,19 +8,18 @@ cur_dir = os.getcwd()
 csv_path = "lnd/202504-bluebikes-tripdata.csv"
 db_pth = "sqlite/bluebikes.db"
 conn = sqlite3.connect("bluebikes.db")
-
-def find_csv(CSV_DIR):
-     for root, files in os.walk(CSV_DIR):
-        for file in files:
-            if file.endswith(".csv"):
-                return os.path.join(root, file)
             
-def run_sql(conn, folder, file_list):
+def run_sql_folder(conn, folder, file_list):
     for file in file_list:
         path = os.path.join(folder, file)
         with open(path, "r") as f:
             sql = f.read()
         conn.executescript(sql)
+
+def run_sql(path):
+    with open(path, "r") as f:
+            sql = f.read()
+    conn.executescript(sql)  
 
 def lnd(src_url):
 
@@ -34,8 +33,7 @@ def lnd(src_url):
     with ZipFile(zip_download_path) as zipObject:
         zipObject.extractall(os.path.join(cur_dir,"lnd"))
 
-    csv_path = find_csv("lnd")
     df = pd.read_csv(csv_path)
     conn = sqlite3.connect("bluebikes.db")
 
-    df.to_sql('LND',conn)
+    df.to_sql('LND',conn,if_exists="replace")

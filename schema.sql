@@ -16,4 +16,5 @@ SELECT
     start_station_id,
     end_station_id,
     member_casual
+FROM lnd
 );
