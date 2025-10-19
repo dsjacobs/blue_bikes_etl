@@ -2,13 +2,12 @@ import sqlite3
 import pandas as pd
 
 def station_analysis():
-    conn = sqlite3.connect("bluebikes.db")
+    conn = sqlite3.connect("sqlite_db/bluebikes.db")
 
     stations = pd.read_sql_query("SELECT * FROM stations", conn)
     rides = pd.read_sql_query("SELECT * FROM rides", conn)
 
-    rides["ended_at_ts"] = pd.to_datetime(rides["ended_at"])
-    rides["started_at_ts"] = pd.to_datetime(rides["started_at"])
+    rides["started_at_ts"] = pd.to_datetime(rides["start_ts"])
     rides["hour"] = rides["started_at_ts"].dt.hour
         
     def commuter_time(hour):
@@ -20,7 +19,6 @@ def station_analysis():
             return 0
         
     rides["commuter_hours"] = rides["hour"].apply(commuter_time)
-    rides[["started_at","time_of_day", "commuter_hours"]]
 
     by_station = rides.groupby(["start_station_id","commuter_hours"])["ride_id"].count().reset_index()
     by_station["station_id"] = by_station["start_station_id"]

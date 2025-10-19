@@ -1,16 +1,16 @@
 CREATE TABLE IF NOT EXISTS station_day_arrivals_departures AS
 WITH leaving AS (
 	SELECT start_station_id AS station_id,
-    	STRFTIME('%m', started_at) AS ride_month,
-		STRFTIME('%d', started_at) AS ride_date,
+    	STRFTIME('%m', start_ts) AS ride_month,
+		STRFTIME('%d', start_ts) AS ride_date,
 		count(*) AS ride_count
 	FROM rides
 	GROUP BY 1,2,3
 ),
 arriving AS (
 	SELECT end_station_id AS station_id,
-    	STRFTIME('%m', ended_at) AS ride_month,
-		STRFTIME('%d', ended_at) AS ride_date,
+    	STRFTIME('%m', end_ts) AS ride_month,
+		STRFTIME('%d', end_ts) AS ride_date,
 		count(*) AS ride_count
 	FROM rides
 	GROUP BY 1,2,3
