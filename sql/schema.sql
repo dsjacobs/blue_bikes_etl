@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS stations AS
         end_lng AS long
     FROM lnd;
 
-CREATE INDEX ix_sstation on stations (station_id);
+CREATE INDEX ix_station on stations (station_id);
 
 CREATE TABLE IF NOT EXISTS rides AS 
 SELECT 
