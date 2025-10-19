@@ -23,24 +23,29 @@ def run_sql(path):
     conn.executescript(sql)  
 
 def lnd(src_url):
-
+    lnd_folder = os.path.join(cur_dir,"lnd")
+    os.makedirs(lnd_folder, exist_ok=True)
     response = requests.get(src_url)
-    zip_download_path = 'LND.zip'
+    zip_download_path = os.path.join(lnd_folder,'LND.zip')
 
     if response.status_code == 200:
         with open(zip_download_path, 'wb') as file:
             file.write(response.content)
 
     with ZipFile(zip_download_path) as zipObject:
-        zipObject.extractall(os.path.join(cur_dir,"lnd"))
+        zipObject.extractall(lnd_folder)
+
+    db_folder = os.path.join(cur_dir,"sqlite_db")
+    os.makedirs(db_folder, exist_ok=True)
 
     df = pd.read_csv(csv_path)
-    conn = sqlite3.connect("bluebikes.db")
+    conn = sqlite3.connect(os.path.join(db_folder,"bluebikes.db"))
 
     df.to_sql('LND',conn,if_exists="replace")
 
 def run_analysis():
-    metric_a()
-    metric_b()
-    metric_c()
-    metric_d()
+    run_sql("busy_stations.sql")
+#     metric_a()
+#     metric_b()
+#     metric_c()
+#     metric_d()
