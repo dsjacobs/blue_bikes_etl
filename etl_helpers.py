@@ -3,13 +3,13 @@ from zipfile import ZipFile
 import sqlite3
 import os
 import pandas as pd
-from analysis import *
 
 cur_dir = os.getcwd()
 csv_path = "lnd/202504-bluebikes-tripdata.csv"
-db_pth = "sqlite/bluebikes.db"
-conn = sqlite3.connect("bluebikes.db")
-            
+lnd_folder = os.path.join(cur_dir,"lnd")
+db_folder = os.path.join(cur_dir,"sqlite_db")
+conn = sqlite3.connect(os.path.join(db_folder,"bluebikes.db"))
+      
 def run_sql_folder(conn, folder, file_list):
     for file in file_list:
         path = os.path.join(folder, file)
@@ -35,13 +35,10 @@ def lnd(src_url):
     with ZipFile(zip_download_path) as zipObject:
         zipObject.extractall(lnd_folder)
 
-    db_folder = os.path.join(cur_dir,"sqlite_db")
     os.makedirs(db_folder, exist_ok=True)
-
     df = pd.read_csv(csv_path)
-    conn = sqlite3.connect(os.path.join(db_folder,"bluebikes.db"))
-
     df.to_sql('LND',conn,if_exists="replace")
+
 
 def run_analysis():
     run_sql("busy_stations.sql")

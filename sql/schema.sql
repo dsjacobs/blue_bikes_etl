@@ -2,13 +2,15 @@ CREATE TABLE IF NOT EXISTS stations AS
     SELECT DISTINCT start_station_id AS id,
         start_station_name AS station_name,
         start_lat AS lat,
-        start_long AS long 
+        start_lng AS long 
     FROM lnd
     UNION SELECT end_station_id,
         end_station_name,
         end_lat AS lat,
-        end_long AS long
+        end_lng AS long
     FROM lnd;
+
+CREATE INDEX ix_sstation on stations (station_id);
 
 CREATE TABLE IF NOT EXISTS rides AS 
 SELECT 
@@ -20,3 +22,5 @@ SELECT
     end_station_id,
     member_casual
 FROM lnd;
+
+CREATE INDEX ix_rides on rides (ride_id)
