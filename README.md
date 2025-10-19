@@ -6,14 +6,21 @@ I picked Blue Bikes (the rideshare bikes in Boston) as they are of local interes
 Documentation: https://bluebikes.com/system-data
 
 Question 1: Which stations have the most difference in bikes taken out and bikes returned on the same day? 
-This could help BlueBikes determine where to bus bikes to and from.
+This could help BlueBikes determine where to bus bikes to and from. This is printed out.
 
 BlueBikes is already likely driving bikes to these locations, which is how it's possible to have more bikes taken than returned. Where should they continue to focus their efforts?
 
 Question 2: Are members taking advantage of their benefits (unlimited under 45 min rides, and a discounted rate on ebikes) compared to casual riders? Do members or non members tend to take more under or over 45m rides and ebikes?
 
-Members are more active than casual riders in all categories, are more likely to take ebikes, and are more likely to stay under the 45 minute limit.
+Members are more active than casual riders in all categories, are more likely to take ebikes, and are more likely to stay under the 45 minute limit. This is printed out.
 
 Question 3: Which stations are the most popular, and are they frequented more often than not during commuter hours?
 
 How much of the most popular activity on the BlueBike network happens during commuter housrs (7-9a, 4-6p), and where?
+This is returned to an image that is generated when the ETL is run.
+
+Possible future questions:
+How does this data change month to month?
+How does this change along with weather data?
+Are certain towns more popular for riders?
+Do different locations see more activity at different times of day?
