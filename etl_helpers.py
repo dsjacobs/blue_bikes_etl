@@ -40,9 +40,6 @@ def lnd(src_url):
     df.to_sql('LND',conn,if_exists="replace")
 
 
-def run_analysis():
+def run_sql_analysis():
     run_sql("busy_stations.sql")
-#     metric_a()
-#     metric_b()
-#     metric_c()
-#     metric_d()
+    run_sql("time_limits.sql")
