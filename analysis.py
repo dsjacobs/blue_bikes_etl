@@ -1,5 +1,7 @@
 import sqlite3
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 def station_analysis():
     conn = sqlite3.connect("sqlite_db/bluebikes.db")
@@ -35,4 +37,7 @@ def station_analysis():
         columns="commuter_hours", 
         values="ride_id"
     )
-    by_station_top20.plot.bar(stacked=True)
+    ax = by_station_top20.plot.bar(stacked=True)
+    fig = ax.get_figure()
+    fig.savefig('top_20_stations.png',bbox_inches='tight')
+
