@@ -50,6 +50,15 @@ def run_sql(path):
     conn.close()  
 
 def run_analysis():
+    conn = make_conn()
     run_sql("sql/busy_stations.sql")
+    print("Top 10 stations with more bikes taken out than returned")
+    busy_stations = conn.execute("SELECT * FROM station_surplus_deficits;")
+    for row in busy_stations.fetchall():
+        print(row)
     run_sql("sql/time_limits.sql")
+    print("Do members take more under-45 minute rides?")
+    time_limits_query = conn.execute("SELECT * FROM time_limits_query;")
+    for row in time_limits_query.fetchall():
+        print(row)
     station_analysis()

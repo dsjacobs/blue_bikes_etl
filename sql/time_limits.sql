@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS time_limits_query;
+CREATE TABLE time_limits_query AS
 WITH ride_lengths AS (
 SELECT ride_id,
 	rideable_type,
@@ -14,4 +16,4 @@ SELECT rideable_type,
 	count(distinct ride_id) ride_count
 FROM ride_lengths
 GROUP BY 1,2,3
-ORDER BY 1,2,3
+ORDER BY 1,2,3;
